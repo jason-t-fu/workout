@@ -15,12 +15,18 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Prep for heroku provisioning
-const port = process.env.PORT || 5000;
-
 // Importing backend routes
+// Models need to be imported before passport, models need to be defined first?
 const users = require("./routes/api/users");
 app.use("/api/users", users);
+
+// Passport to include bearer token in headers
+const passport = require("passport");
+app.use(passport.initialize()); // No mount path, executed for every req
+require('./config/passport')(passport);
+
+// Prep for provisioning
+const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => res.send('hello world!'));
 app.listen(port, () => console.log(`Server is running on port ${port}`));
