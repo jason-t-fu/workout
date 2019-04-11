@@ -1,5 +1,6 @@
 
 const express = require('express');
+const router = express.Router();
 
 const passport = require('passport');
 
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
   Exercise.find()
     .sort({ date: -1 })
     .then(exercises => res.json(exercises))
-    .catch(() => res.status(404).json({ noexerisesfound: 'No exercises Found' }))
+    .catch(() => res.status(404).json({ noexerisesfound: 'No exercises Found' }));
 });
 
 router.get('/:id', (req, res) => {
