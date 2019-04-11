@@ -34,12 +34,15 @@ router.post('/', passport.authenticate('jwt', { session: false }),
   }
 );
 
-router.delete('/:id', (req, res) => {
-  Exercise.findByIdAndDelete(req.params.id)
-    .then(response => {
-      console.log(res);
-      res.json(response);
-    });
-});
+router.delete('/:id', passport.authenticate('jwt', { session: false }), 
+  (req, res) => {
+    Exercise.findByIdAndDelete(req.params.id)
+      .then(response => {
+        console.log(res);
+        res.json(response);
+      })
+      .catch(err => console.log(err));
+  }
+);
 
 module.exports = router;
