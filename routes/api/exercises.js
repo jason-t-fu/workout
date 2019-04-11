@@ -13,6 +13,12 @@ router.get('/', (req, res) => {
     .catch(() => res.status(404).json({ noexerisesfound: 'No exercises Found' }))
 });
 
+router.get('/:id', (req, res) => {
+  Exercise.findById(req.params.id)
+    .then(exercise => res.json(exercise))
+    .catch(() => res.status(404).json({ noexercisefound: 'No exercise found with that ID' }));
+});
+
 router.post('/', passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateExerciseInput(req.body);
@@ -28,10 +34,12 @@ router.post('/', passport.authenticate('jwt', { session: false }),
   }
 );
 
-router.get('/:id', (req, res) => {
-  Exercise.findById(req.params.id)
-    .then(exercise => res.json(exercise))
-    .catch(() => res.status(404).json({ noexercisefound: 'No exercise found with that ID' }));
+router.delete('/:id', (req, res) => {
+  Exercise.findByIdAndDelete(req.params.id)
+    .then(response => {
+      console.log(res);
+      res.json(response);
+    });
 });
 
 module.exports = router;

@@ -18,7 +18,9 @@ app.use(bodyParser.json());
 // Importing backend routes
 // Models need to be imported before passport, models need to be defined first?
 const users = require("./routes/api/users");
+const exercises = require("./routes/api/exercises");
 app.use("/api/users", users);
+app.use("/api/exercises", exercises);
 
 // Passport to include bearer token in headers
 const passport = require("passport");
