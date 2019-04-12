@@ -1,18 +1,16 @@
-import {
-  RECEIVE_CURRENT_USER,
-  RECEIVE_USER_LOGOUT,
-  RECEIVE_USER_SIGN_IN
-} from '../actions/sessionActions';
+import { RECEIVE_CURRENT_USER,
+         RECEIVE_USER_LOGOUT,
+         RECEIVE_USER_SIGN_IN } from '../actions/sessionActions';
 
 const _initialState = {
   isAuthenticated: false,
-  user: undefined
+  user: {}
 };
 
-const sessionReducer = (state = _initialState, action) => {
+const sessionApiReducer = (state = _initialState, action) => {
   Object.freeze(state);
 
-  switch (action.type) {
+  switch(action.type) {
     case RECEIVE_CURRENT_USER:
       return {
         ...state,
@@ -30,5 +28,3 @@ const sessionReducer = (state = _initialState, action) => {
       return state;
   }
 };
-
-export default sessionReducer;
