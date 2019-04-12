@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
+    "server:inspect": "nodemon --inspect app.js",
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "dev:debug": "concurrently \"npm run server:inspect\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/routeUtil';
 import { Switch } from 'react-router-dom';
+import MainPage from './mainPage';
 
 const App = () => {
   return (

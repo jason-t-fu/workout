@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
       store.dispatch(logout());
       window.location.href = '/login';
     }
-    else {
-      store = configureStore();
-    }
+  }
+  else {
+    store = configureStore();
   }
 
   const root = document.getElementById('root');
