@@ -40,6 +40,7 @@ export const signup = user => {
         return dispatch(receiveUserSignIn());
       })
       .catch(error => {
+        debugger;
         return dispatch(receiveSessionErrors(error.response.data));
       });
   };

@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
-import { login } from '../../actions/sessionActions';
+import { signup } from '../../actions/sessionActions';
 
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-const LoginForm = props => {
+const SignupForm = props => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [alreadySignedIn, setAlreadySignedIn] = useState(false);
   const [errors, setErrors] = useState({});
-  const [previousUser, setPreviousUser] = useState(false);
 
-  // Essentially a componentWillReceiveProps/getDerivedStateFromProps
-  if (props.currentUser !== previousUser) {
-    props.history.push('/tweets');
-    setPreviousUser(props.currentUser);
+  if (props.signedIn === true && props.signedIn !== alreadySignedIn) {
+    props.history.push('/login');
+    setAlreadySignedIn(true);
     setErrors({ errors: props.errors });
   }
 
@@ -22,9 +23,11 @@ const LoginForm = props => {
 
     let user = {
       email,
-      password
+      username,
+      password,
+      password2
     };
-    props.login(user);
+    props.signup(user);
   };
 
   const renderErrors = () => {
@@ -42,13 +45,20 @@ const LoginForm = props => {
   }
 
   return (
-    <div>
+    <div className="login-form-container">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="login-form">
+          <br />
           <input type="text"
             value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)} 
+            onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="Email"
+          />
+          <br />
+          <input type="text"
+            value={username}
+            onChange={(e) => setUsername(e.currentTarget.value)}
+            placeholder="Username"
           />
           <br />
           <input type="password"
@@ -57,7 +67,13 @@ const LoginForm = props => {
             placeholder="Password"
           />
           <br />
-          <input type="submit" value="Submit" />
+          <input type="password"
+            value={password2}
+            onChange={(e) => setPassword2(e.currentTarget.value)}
+            placeholder="Confirm Password"
+          />
+          <br />
+          <button type="submit" value="Submit" />
           {renderErrors()}
         </div>
       </form>
@@ -65,16 +81,18 @@ const LoginForm = props => {
   );
 };
 
+
 const mapStateToProps = state => {
   return {
+    signedIn: state.session.isSignedIn,
     errors: state.errors.session
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => dispatch(login(user))
+    signup: user => dispatch(signup(user))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignupForm));

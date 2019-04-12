@@ -3,6 +3,8 @@ import { AuthRoute, ProtectedRoute } from '../util/routeUtil';
 import { Switch } from 'react-router-dom';
 import MainPage from './mainPage';
 import NavBar from './nav/navBar';
+import LoginForm from './session/loginForm';
+import SignupForm from './session/signupForm';
 
 const App = () => {
   return (
@@ -10,8 +12,8 @@ const App = () => {
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
-        {/* <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupFormContainer} /> */}
+        <AuthRoute exact path="/login" component={LoginForm} />
+        <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
     </div>
   )
