@@ -1,21 +1,23 @@
 import { connect } from 'react-redux';
 import { login } from '../../actions/sessionActions';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
-  const [previousUser, setPreviousUser] = useState(false);
+  const [previousUser, setPreviousUser] = useState(undefined);
 
   // Essentially a componentWillReceiveProps/getDerivedStateFromProps
-  if (props.currentUser !== previousUser) {
-    props.history.push('/tweets');
-    setPreviousUser(props.currentUser);
-    setErrors({ errors: props.errors });
-  }
+  useEffect(() => {
+    if (props.currentUser !== previousUser) {
+      props.history.push('/tweets');
+      setPreviousUser(props.currentUser);
+      setErrors({ errors: props.errors });
+    }
+  });
 
   const handleSubmit = event => {
     event.preventDefault();

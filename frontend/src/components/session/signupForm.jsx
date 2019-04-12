@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { signup } from '../../actions/sessionActions';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 const SignupForm = props => {
@@ -12,11 +12,13 @@ const SignupForm = props => {
   const [alreadySignedIn, setAlreadySignedIn] = useState(false);
   const [errors, setErrors] = useState({});
 
-  if (props.signedIn === true && props.signedIn !== alreadySignedIn) {
-    props.history.push('/login');
-    setAlreadySignedIn(true);
-    setErrors({ errors: props.errors });
-  }
+  useEffect(() => {
+    if (props.signedIn === true && props.signedIn !== alreadySignedIn) {
+      props.history.push('/login');
+      setAlreadySignedIn(true);
+      setErrors({ errors: props.errors });
+    }
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -73,7 +75,7 @@ const SignupForm = props => {
             placeholder="Confirm Password"
           />
           <br />
-          <button type="submit" value="Submit" />
+          <input type="submit" value="Submit" />
           {renderErrors()}
         </div>
       </form>
