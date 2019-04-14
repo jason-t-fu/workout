@@ -12,12 +12,14 @@ const LoginForm = props => {
 
   // Essentially a componentWillReceiveProps/getDerivedStateFromProps
   useEffect(() => {
-    if (props.currentUser !== previousUser) {
-      props.history.push('/tweets');
+    debugger;
+    if (props.currentUser !== previousUser) { //Wtf. where is currentUser coming from
+      debugger;
+      props.history.push('/exercises');
       setPreviousUser(props.currentUser);
       setErrors({ errors: props.errors });
     }
-  });
+  }, []);
 
   const handleSubmit = event => {
     event.preventDefault();
