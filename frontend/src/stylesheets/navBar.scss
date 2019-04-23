@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+  font-family: $sans-serif;
+
+  @include xl {
+
+  }
+}
+
+.navbar-title {
+  padding: 0.5em;
+}
+
+.navbar-links {
+  a {
+    padding: 1.5em;
+  }
+}

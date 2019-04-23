@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { signup } from '../../actions/sessionActions';
 
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const SignupForm = props => {
   const [email, setEmail] = useState('');
@@ -50,33 +50,32 @@ const SignupForm = props => {
     <div className="login-form-container">
       <form onSubmit={handleSubmit}>
         <div className="login-form">
-          <br />
           <input type="text"
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="Email"
           />
-          <br />
           <input type="text"
             value={username}
             onChange={(e) => setUsername(e.currentTarget.value)}
             placeholder="Username"
           />
-          <br />
           <input type="password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             placeholder="Password"
           />
-          <br />
           <input type="password"
             value={password2}
             onChange={(e) => setPassword2(e.currentTarget.value)}
             placeholder="Confirm Password"
           />
-          <br />
           <input type="submit" value="Submit" />
           {renderErrors()}
+          <div>
+            <p>Already have an account?</p>
+            <Link to="/login">Log in.</Link>
+          </div>
         </div>
       </form>
     </div>

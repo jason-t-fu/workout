@@ -14,7 +14,7 @@ const NavBar = props => {
   const getLinks = () => {
     if (props.loggedIn) {
       return (
-        <div>
+        <div className="navbar-links">
           <Link to={'/exercises'}>All Exercises</Link>
           <Link to={'/profile'}>Profile</Link>
           <Link to={'/new_exercise'}>Create a new exercise</Link>
@@ -24,7 +24,7 @@ const NavBar = props => {
     }
     else {
       return (
-        <div>
+        <div className="navbar-links">
           <Link to={'/signup'}>Signup</Link>
           <Link to={'/login'}>Login</Link>
         </div>
@@ -33,8 +33,8 @@ const NavBar = props => {
   };
 
   return (
-    <div>
-      <h1>YAWT</h1>
+    <div className="navbar">
+      <h1 className="navbar-title">YAWT</h1>
       {getLinks()}
     </div>
   );

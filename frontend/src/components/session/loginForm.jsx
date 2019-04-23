@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/sessionActions';
 
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const LoginForm = props => {
   const [email, setEmail] = useState('');
@@ -14,12 +14,11 @@ const LoginForm = props => {
   useEffect(() => {
     debugger;
     if (props.currentUser !== previousUser) { //Wtf. where is currentUser coming from
-      debugger;
       props.history.push('/exercises');
       setPreviousUser(props.currentUser);
       setErrors({ errors: props.errors });
     }
-  }, []);
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,6 +31,7 @@ const LoginForm = props => {
   };
 
   const renderErrors = () => {
+    debugger;
     return (
       <ul>
         {Object.keys(errors).map((error, i) => {
@@ -46,9 +46,9 @@ const LoginForm = props => {
   }
 
   return (
-    <div>
+    <div className="login-form-container">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="login-form">
           <input type="text"
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)} 
@@ -63,6 +63,10 @@ const LoginForm = props => {
           <br />
           <input type="submit" value="Submit" />
           {renderErrors()}
+          <div>
+            <p>Don't have an account?</p>
+            <Link to="/signup">Sign up.</Link>
+          </div>
         </div>
       </form>
     </div>
@@ -70,6 +74,7 @@ const LoginForm = props => {
 };
 
 const mapStateToProps = state => {
+  debugger;
   return {
     errors: state.errors.session
   };
