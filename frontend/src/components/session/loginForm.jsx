@@ -7,18 +7,6 @@ import { withRouter, Link } from 'react-router-dom';
 const LoginForm = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
-  const [previousUser, setPreviousUser] = useState(undefined);
-
-  // Essentially a componentWillReceiveProps/getDerivedStateFromProps
-  useEffect(() => {
-    debugger;
-    if (props.currentUser !== previousUser) { //Wtf. where is currentUser coming from
-      props.history.push('/exercises');
-      setPreviousUser(props.currentUser);
-      setErrors({ errors: props.errors });
-    }
-  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -30,19 +18,12 @@ const LoginForm = props => {
     props.login(user);
   };
 
-  const renderErrors = () => {
-    debugger;
+  const renderErrors = field => {
     return (
-      <ul>
-        {Object.keys(errors).map((error, i) => {
-          return (
-            <li key={`error-${i}`}>
-              {errors[error]}
-            </li>
-          )
-        })}
-      </ul>
-    );
+      <span className="error">
+        {props.errors[field]}
+      </span>
+    )
   }
 
   return (
@@ -54,15 +35,16 @@ const LoginForm = props => {
             onChange={(e) => setEmail(e.currentTarget.value)} 
             placeholder="Email"
           />
+          {renderErrors("email")}
           <br />
           <input type="password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             placeholder="Password"
           />
+          {renderErrors("email")}
           <br />
           <input type="submit" value="Submit" />
-          {renderErrors()}
           <div>
             <p>Don't have an account?</p>
             <Link to="/signup">Sign up.</Link>
@@ -74,7 +56,6 @@ const LoginForm = props => {
 };
 
 const mapStateToProps = state => {
-  debugger;
   return {
     errors: state.errors.session
   };

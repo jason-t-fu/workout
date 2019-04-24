@@ -9,16 +9,6 @@ const SignupForm = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
-  const [alreadySignedIn, setAlreadySignedIn] = useState(false);
-  const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    if (props.signedIn === true && props.signedIn !== alreadySignedIn) {
-      props.history.push('/login');
-      setAlreadySignedIn(true);
-      setErrors({ errors: props.errors });
-    }
-  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,18 +22,12 @@ const SignupForm = props => {
     props.signup(user);
   };
 
-  const renderErrors = () => {
+  const renderErrors = field => {
     return (
-      <ul>
-        {Object.keys(errors).map((error, i) => {
-          return (
-            <li key={`error-${i}`}>
-              {errors[error]}
-            </li>
-          )
-        })}
-      </ul>
-    );
+      <span className="error">
+        {props.errors[field]}
+      </span>
+    )
   }
 
   return (
@@ -55,23 +39,30 @@ const SignupForm = props => {
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="Email"
           />
+          {renderErrors("email")}
+          <br />
           <input type="text"
             value={username}
             onChange={(e) => setUsername(e.currentTarget.value)}
             placeholder="Username"
           />
+          {renderErrors("username")}
+          <br />
           <input type="password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             placeholder="Password"
           />
+          {renderErrors("password")}
+          <br />
           <input type="password"
             value={password2}
             onChange={(e) => setPassword2(e.currentTarget.value)}
             placeholder="Confirm Password"
           />
+          {renderErrors("password2")}
+          <br />
           <input type="submit" value="Submit" />
-          {renderErrors()}
           <div>
             <p>Already have an account?</p>
             <Link to="/login">Log in.</Link>
@@ -82,10 +73,8 @@ const SignupForm = props => {
   );
 };
 
-
 const mapStateToProps = state => {
   return {
-    signedIn: state.session.isSignedIn,
     errors: state.errors.session
   };
 };
