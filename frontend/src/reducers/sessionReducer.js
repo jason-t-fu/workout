@@ -1,34 +1,22 @@
 import {
   RECEIVE_CURRENT_USER,
-  RECEIVE_USER_LOGOUT,
-  RECEIVE_USER_SIGN_IN
+  RECEIVE_USER_LOGOUT
 } from '../actions/sessionActions';
 
-const _initialState = {
-  isAuthenticated: false,
-  user: {}
+const _nullUser = {
+  user: undefined
 };
 
-const sessionReducer = (state = _initialState, action) => {
+const sessionReducer = (state = _nullUser, action) => {
   Object.freeze(state);
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return {
-        ...state,
-        isAuthenticated: !!action.currentUser,
         user: action.currentUser
       };
     case RECEIVE_USER_LOGOUT:
-      return {
-        isAuthenticated: false,
-        user: undefined
-      };
-    case RECEIVE_USER_SIGN_IN:
-      return {
-        ...state,
-        isSignedIn: true
-      };
+      return _nullUser;
     default:
       return state;
   }

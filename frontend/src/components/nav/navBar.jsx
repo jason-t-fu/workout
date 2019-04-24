@@ -42,7 +42,7 @@ const NavBar = props => {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.session.isAuthenticated
+    loggedIn: !!state.session.user
   }
 };
 

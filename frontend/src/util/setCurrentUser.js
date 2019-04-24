@@ -8,7 +8,7 @@ const setCurrentUser = () => {
     setAuthToken(localStorage.jwtToken);
 
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+    const preloadedState = { session: { user: decodedUser } };
 
     const store = configureStore(preloadedState);
 
