@@ -34,7 +34,7 @@ const NavBar = props => {
 
   return (
     <div className="navbar">
-      <h1 className="navbar-title">YAWT</h1>
+      <a href={'/'} className="navbar-title">YAWT</a>
       {getLinks()}
     </div>
   );

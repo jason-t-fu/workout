@@ -36,14 +36,12 @@ const LoginForm = props => {
             placeholder="Email"
           />
           {renderErrors("email")}
-          <br />
           <input type="password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             placeholder="Password"
           />
           {renderErrors("email")}
-          <br />
           <input type="submit" value="Submit" />
           <div>
             <p>Don't have an account?</p>
