@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: AWS_MONGO_URI,
-  secretOrKey: AWS_SECRET_OR_KEY
+  mongoURI: process.env.AWS_MONGO_URI,
+  secretOrKey: process.env.AWS_SECRET_OR_KEY
 };
