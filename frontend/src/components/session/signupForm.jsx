@@ -40,34 +40,31 @@ const SignupForm = props => {
             placeholder="Email"
           />
           {renderErrors("email")}
-          <br />
           <input type="text"
             value={username}
             onChange={(e) => setUsername(e.currentTarget.value)}
             placeholder="Username"
           />
           {renderErrors("username")}
-          <br />
           <input type="password"
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
             placeholder="Password"
           />
           {renderErrors("password")}
-          <br />
           <input type="password"
             value={password2}
             onChange={(e) => setPassword2(e.currentTarget.value)}
             placeholder="Confirm Password"
           />
           {renderErrors("password2")}
-          <br />
           <input type="submit" value="Submit" />
-          <div>
+          </div>
+          <div className="switch">
             <p>Already have an account?</p>
             <Link to="/login">Log in.</Link>
           </div>
-        </div>
+        <div className="bg-image"></div>
       </form>
     </div>
   );
